@@ -1,7 +1,7 @@
 ---
 title: "Lab 02 - Plastic waste"
-author: "Votre nom"
-date: "La date"
+author: "Élodie Lefebvre"
+date: "22 septembre 2025"
 output: github_document
 ---
 
@@ -28,7 +28,9 @@ plastic_waste <- plastic_waste %>%
 ### Exercise 1
 
 ```{r plastic-waste-continent}
-# insert code here
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) + 
+               geom_histogram(binwidth = 0.2) +
+ facet_grid(. ~ continent)
 ```
 
 ### Exercise 2
