@@ -47,50 +47,65 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap, color = continent, fill = c
                alpha = 0.4) 
 ```
 
-Réponse à la question...
+Les réglages de couleurs dépendent des variables, alors que les réglages de transparence s'appliquent à toutes les variables. C'est pourquoi la couleur est dans aes et que la transparence est dans geom_density
 
 ### Exercise 3
 
 Boxplot:
 
 ```{r plastic-waste-boxplot}
-# insert code here
+ggplot(plastic_waste, aes(x = continent,
+                  y = plastic_waste_per_cap)) +
+  geom_boxplot()
 ```
 
 Violin plot:
 
 ```{r plastic-waste-violin}
-# insert code here
+ggplot(plastic_waste, aes(x = continent,
+                  y = plastic_waste_per_cap)) +
+  geom_violin()
 ```
 
-Réponse à la question...
+Le violin plot permet de voir la distribution complète des données, ce que ne permet pas box plot
 
 ### Exercise 4
 
 
 ```{r plastic-waste-mismanaged}
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap,
+                  y = mismanaged_plastic_waste_per_cap, color = continent)) +
+  geom_point()
 ```
-
-Réponse à la question...
+plus le nombre de déchets générés est grand, le nombre de déchets non gérés a tendance à augmenter aussi
 
 ### Exercise 5
 
 
 ```{r plastic-waste-population-total}
-# insert code here
+ggplot(plastic_waste, aes(x = total_pop,
+                  y = plastic_waste_per_cap)) +
+  geom_point()
 ```
 
 ```{r plastic-waste-population-coastal}
-# insert code here
+ggplot(plastic_waste, aes(x = coastal_pop,
+                  y = plastic_waste_per_cap)) +
+  geom_point()
 ```
 
-Réponse à la question...
+Non, les relations entre les deux paires de variables semblent être équivalentes.
 
 ## Conclusion
 
 Recréez la visualisation:
 
 ```{r recreate-viz}
-# insert code here
+ggplot(plastic_waste_coastal <- plastic_waste %>% 
+  mutate(coastal_pop_prop = coastal_pop / total_pop) %>%
+  filter(plastic_waste_per_cap < 3), aes(x = coastal_pop_prop,
+                  y = plastic_waste_per_cap)) +
+  geom_point(aes(color = continent)) +
+  geom_smooth(color = "black")
 ```
+La courbe est plutôt horizontale, ce qui signifie qu'il n'y a pas de relation significative entre le nombre de déchets plastiques produits et le ratio de personnes habitants sur les côtes/population totales des pays

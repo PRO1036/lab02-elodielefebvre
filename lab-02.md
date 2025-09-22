@@ -64,48 +64,93 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap, color = continent, fill = c
 
 ![](lab-02_files/figure-gfm/plastic-waste-density-4.png)<!-- -->
 
-Réponse à la question…
+Les réglages de couleurs dépendent des variables, alors que les réglages
+de transparence s’appliquent à toutes les variables. C’est pourquoi la
+couleur est dans aes et que la transparence est dans geom_density
 
 ### Exercise 3
 
 Boxplot:
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = continent,
+                  y = plastic_waste_per_cap)) +
+  geom_boxplot()
 ```
+
+![](lab-02_files/figure-gfm/plastic-waste-boxplot-1.png)<!-- -->
 
 Violin plot:
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = continent,
+                  y = plastic_waste_per_cap)) +
+  geom_violin()
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-violin-1.png)<!-- -->
+
+Le violin plot permet de voir la distribution complète des données, ce
+que ne permet pas box plot
 
 ### Exercise 4
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap,
+                  y = mismanaged_plastic_waste_per_cap, color = continent)) +
+  geom_point()
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- --> plus
+le nombre de déchets générés est grand, le nombre de déchets non gérés a
+tendance à augmenter aussi
 
 ### Exercise 5
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = total_pop,
+                  y = plastic_waste_per_cap)) +
+  geom_point()
 ```
+
+    ## Warning: Removed 10 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](lab-02_files/figure-gfm/plastic-waste-population-total-1.png)<!-- -->
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = coastal_pop,
+                  y = plastic_waste_per_cap)) +
+  geom_point()
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-population-coastal-1.png)<!-- -->
+
+Non, les relations entre les deux paires de variables semblent être
+équivalentes.
 
 ## Conclusion
 
 Recréez la visualisation:
 
 ``` r
-# insert code here
+ggplot(plastic_waste_coastal <- plastic_waste %>% 
+  mutate(coastal_pop_prop = coastal_pop / total_pop) %>%
+  filter(plastic_waste_per_cap < 3), aes(x = coastal_pop_prop,
+                  y = plastic_waste_per_cap)) +
+  geom_point(aes(color = continent)) +
+  geom_smooth(color = "black")
 ```
+
+    ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+
+    ## Warning: Removed 10 rows containing non-finite outside the scale range
+    ## (`stat_smooth()`).
+
+    ## Warning: Removed 10 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](lab-02_files/figure-gfm/recreate-viz-1.png)<!-- --> La courbe est
+plutôt horizontale, ce qui signifie qu’il n’y a pas de relation
+significative entre le nombre de déchets plastiques produits et le ratio
+de personnes habitants sur les côtes/population totales des pays
