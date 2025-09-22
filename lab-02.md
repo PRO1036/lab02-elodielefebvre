@@ -36,8 +36,33 @@ ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
 ### Exercise 2
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap)) +
+         geom_density() 
 ```
+
+![](lab-02_files/figure-gfm/plastic-waste-density-1.png)<!-- -->
+
+``` r
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, color = continent)) +
+         geom_density() 
+```
+
+![](lab-02_files/figure-gfm/plastic-waste-density-2.png)<!-- -->
+
+``` r
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, color = continent, fill = continent)) +
+         geom_density() 
+```
+
+![](lab-02_files/figure-gfm/plastic-waste-density-3.png)<!-- -->
+
+``` r
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, color = continent, fill = continent)) +
+         geom_density(adjust = 1, 
+               alpha = 0.4) 
+```
+
+![](lab-02_files/figure-gfm/plastic-waste-density-4.png)<!-- -->
 
 Réponse à la question…
 
